@@ -1,11 +1,13 @@
 package main
 import "fmt"
 
-func binarySearch[T any](arr []T, target T, low int, high int, f func(T, T) int) int {
-  // expects low to be 0, high to be len(arr) on first call, unfortunately go doesn't have default arguments
-  // TIME O(logN)
-  // SPACE O(logN) due to recursive callstack
-  // Multiply each by the time and space complexity of the supplied comparison function f if not O(1)
+// cmpFunc should return 0 for x == y, 1 for x > y, -1 for x < y
+type cmpFunc [T any]func(x, y T) int
+
+// Expects low to be 0, high to be len(arr) on first call, unfortunately go doesn't have default arguments
+func binarySearch[T any](arr []T, target T, low int, high int, f cmpFunc) int {
+// TIME O(logN), multiply by cmpFunc time
+// SPACE O(logN) due to recursive callstack, multiply by cmpFunc space
     if low > high {
         return -1
     }
