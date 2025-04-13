@@ -7,6 +7,8 @@ type cmpFunc [T any]func(x, y T) int
 // Returns the index the target value was found at
 // Return value of -1 means the value was not in the slice
 func binarySearch[T any](arr []T, target T, low int, high int, f cmpFunc) int {
+	// TIME O(logN) multiply by cmpFunc time
+	// SPACE O(1) multiply by cmpFunc space
 	low := 0
 	high := len(arr) - 1
 	for low <= high {
