@@ -4,7 +4,11 @@ import "fmt"
 // cmpFunc should return 0 for x == y, 1 for x > y, -1 for x < y
 type cmpFunc [T any]func(x, y T) int
 
-// Expects low to be 0, high to be len(arr) on first call, unfortunately go doesn't have default arguments
+// Takes a slice, target value, and comparison function as arguments
+// Returns the index the target value was found at
+// Return value of -1 means the value was not in the slice
+// Expects low == 0, high == len(arr) - 1 on first call
+// Unfortunately Go doesn't have default arguments
 func binarySearch[T any](arr []T, target T, low int, high int, f cmpFunc) int {
 // TIME O(logN), multiply by cmpFunc time
 // SPACE O(logN) due to recursive callstack, multiply by cmpFunc space
